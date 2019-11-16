@@ -1,2 +1,2 @@
-# Front para a Aplicação Web Labrys 
+# Frontend para a Aplicação Web Labrys 
 
