@@ -11,6 +11,8 @@ import { MapaAtualComponent } from './mapa-atual/mapa-atual.component';
 import { RelatosComponent } from './relatos/relatos.component';
 import { ApoioComponent } from './apoio/apoio.component';
 import { StaffComponent } from './staff/staff.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { StaffComponent } from './staff/staff.component';
     BrowserModule,
     AppRoutingModule,
     ClarityModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

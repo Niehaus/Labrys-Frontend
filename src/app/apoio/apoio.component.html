@@ -1,1 +1,85 @@
-<p>apoio works!</p>
+<div class="clr-row clr-justify-content-center">
+  <div class="clr-col-6">
+    <h1> Lista de Voluntários</h1>
+  </div>
+  <div class="clr-col-8">
+    <clr-datagrid>
+      <clr-dg-column>Nome</clr-dg-column>
+      <clr-dg-column>Serviço</clr-dg-column>
+      <clr-dg-column>Telefone</clr-dg-column>
+      <clr-dg-column>Funcionamento</clr-dg-column>
+      <clr-dg-column>Twitter</clr-dg-column>
+
+      <clr-dg-row *ngFor="let voluntario of voluntarios">
+        <clr-dg-cell>{{voluntario.nome}}</clr-dg-cell>
+        <clr-dg-cell>{{voluntario.tipo_da_ajuda}}</clr-dg-cell>
+        <clr-dg-cell>{{voluntario.telefone}}</clr-dg-cell>
+        <clr-dg-cell>Twitter: {{voluntario.twitter_user}}<br>
+            Facebook: {{voluntario.fb_link}}<br>
+            WhatsApp: {{voluntario.wpp_num}}
+        </clr-dg-cell>
+        <clr-dg-cell style="width: 600px;">{{voluntario.descr_funcionamento}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga sed consectetur quae cupiditate laudantium aspernatur natus ex vero! Dolore doloremque inventore natus fugit nisi itaque sapiente voluptatum dolor quasi nam?</clr-dg-cell>      </clr-dg-row>
+
+      <clr-dg-footer>{{voluntarios.length}} voluntarios</clr-dg-footer>
+    </clr-datagrid>
+  </div>
+</div>
+<div class="clr-row clr-justify-content-center">
+<div class="clr-col-6">
+    <h2> Deseja Ajudar Também? Cadastra-se Agora!</h2>
+</div>
+<div class="clr-col-8">
+        <button class="btn btn-outline" (click)="basic = true">Realizar Cadastro</button>
+</div>
+
+
+<clr-modal [(clrModalOpen)]="basic" [clrModalSize]="'md'">
+  <h3 class="modal-title">Seja um Voluntário!</h3>
+  <div class="modal-body">
+    <form clrForm>
+        <clr-input-container>
+            <label>Nome</label>
+            <input clrInput placeholder="Nome Jurídico" name="nome" [(ngModel)]="modalVoluntario.nome"/>
+        </clr-input-container>
+        <clr-input-container>
+            <label>Tipo da Ajuda</label>
+            <input clrInput placeholder="Psicologo/Abrigo/.." name="nome" [(ngModel)]="modalVoluntario.nome" />
+        </clr-input-container>
+        <clr-input-container>
+            <label>Telefone</label>
+            <input clrInput placeholder="Numero de Telefone" name="nome" [(ngModel)]="modalVoluntario.nome" />
+        </clr-input-container>
+
+        <clr-accordion style="margin: 20px 0 0 0;">
+          <clr-accordion-panel>
+            <clr-accordion-title>Redes Sociais</clr-accordion-title>
+            <clr-accordion-content *clrIfExpanded>
+                <clr-input-container>
+                    <label>@ do Twitter</label>
+                    <input clrInput placeholder="Twitter" name="nome" [(ngModel)]="modalVoluntario.nome" />
+                </clr-input-container>
+                <clr-input-container>
+                    <label>Link do Facebook</label>
+                    <input clrInput placeholder="Facebook Link" name="nome" [(ngModel)]="modalVoluntario.nome" />
+                </clr-input-container>
+                <clr-input-container>
+                    <label>Número do WhatsApp</label>
+                    <input clrInput placeholder="Número WhatsApp" name="nome" [(ngModel)]="modalVoluntario.nome" />
+                </clr-input-container>
+            </clr-accordion-content>
+          </clr-accordion-panel>
+        </clr-accordion>
+        
+            <clr-textarea-container style="height: fit-content;">
+                <label>Descrição do Serviço</label>
+                <textarea  clrTextarea [(ngModel)]="modalVoluntario.nome" name="nome"
+                placeholder="Nos conte como funciona seu serviço.." required>
+                </textarea>
+        </clr-textarea-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="cancelar()">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="salvar()">Confirmar Cadastro</button>
+  </div>
+</clr-modal>
