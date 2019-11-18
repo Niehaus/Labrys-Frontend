@@ -1,0 +1,17 @@
+h1 {
+  text-align: center;
+  margin: 20px 0 0 0;
+  font-weight: normal;
+}
+
+h2 {
+  text-align: center;
+  margin: 20px 0 0 0;
+  font-weight: normal;
+}
+
+button {
+  display: block;
+  text-align: center;
+  margin: 30px auto;
+}

@@ -10,9 +10,11 @@ export class ApoioComponent implements OnInit {
 
   private modalVoluntario: Voluntario;
   private voluntarios = new Array<Voluntario>();
-  
+
   private basic: boolean;
   private acao: number;
+
+  private Cadastro = {  };
 
   constructor(private service: ApoioService) { }
 
@@ -21,43 +23,54 @@ export class ApoioComponent implements OnInit {
     this.service.getVoluntarios().subscribe(voluntarios => this.voluntarios = voluntarios);
   }
   
-    salvar() {
-      if (this.acao == 0) {
-        this.service.adicionar(this.modalVoluntario).subscribe(res => {
-          this.modalVoluntario.idcadastro_voluntario = res.insertId;
-          this.voluntarios.push(this.modalVoluntario);
-          this.fecharModal();
-        });
-      } else if (this.acao == 1) {
-        this.service.editar(this.modalVoluntario).subscribe(res => {
-          let viagemIdx = this.voluntarios.findIndex(v => v.idcadastro_voluntario == this.modalVoluntario.idcadastro_voluntario);
-          this.voluntarios[viagemIdx] = this.modalVoluntario;
-          this.fecharModal();
-        });
-      }      
-    }
+  salvar() {
+    this.Cadastro = {
+      User: {
+        nome: this.modalVoluntario.nome,
+        telefone: this.modalVoluntario.telefone
+      },
+      Ajuda: {
+        tipo_da_ajuda: this.modalVoluntario.tipo_da_ajuda,
+        descr_funcionamento: this.modalVoluntario.descr_funcionamento,
+      },
+      RedeSocial: {
+        twitter_user: this.modalVoluntario.twitter_user,
+        fb_link: this.modalVoluntario.fb_link,
+        wpp_num: this.modalVoluntario.wpp_num,
+      }
+    };
+    this.service.adicionar(this.Cadastro).subscribe(res => {
+      this.modalVoluntario.idcadastro_voluntario = res.insertId;
+      this.voluntarios.push(this.modalVoluntario);
+      this.fecharModal();
+    }); 
+  }
 
-    adicionar() {
+  adicionar() {
+    this.modalVoluntario = new Voluntario();
+    this.basic = true;
+  }
 
-    }
+  fecharModal() {
+    this.modalVoluntario = new Voluntario();
+    this.basic = false;
+  }
 
-    fecharModal() {
-
-    }
-
-    editar() {
-
-    }
+  cancelar() {
+    this.modalVoluntario = new Voluntario();
+    this.basic = false;
+  }
 }
-  export class Voluntario{
+
+  export class Voluntario {
     idcadastro_voluntario: number;
     nome: string;
-    tipo_da_ajuda: "";
+    tipo_da_ajuda: string;
     telefone: string;
     descr_funcionamento: string;
-    twitter_user: "";
-    fb_link = "";
-    wpp_num = "";
+    twitter_user: string;
+    fb_link: string;
+    wpp_num: string;
 
   constructor(){
     this.idcadastro_voluntario = 0;

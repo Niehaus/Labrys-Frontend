@@ -39,15 +39,15 @@
     <form clrForm>
         <clr-input-container>
             <label>Nome</label>
-            <input clrInput placeholder="Nome Jurídico" name="nome" [(ngModel)]="modalVoluntario.nome"/>
+            <input clrInput placeholder="Nome Jurídico" name="nome" [(ngModel)]="modalVoluntario.nome" required/>
         </clr-input-container>
         <clr-input-container>
             <label>Tipo da Ajuda</label>
-            <input clrInput placeholder="Psicologo/Abrigo/.." name="nome" [(ngModel)]="modalVoluntario.nome" />
+            <input clrInput placeholder="Psicologo/Abrigo/.." name="tipo_da_ajuda" [(ngModel)]="modalVoluntario.tipo_da_ajuda" required/>
         </clr-input-container>
         <clr-input-container>
             <label>Telefone</label>
-            <input clrInput placeholder="Numero de Telefone" name="nome" [(ngModel)]="modalVoluntario.nome" />
+            <input clrInput placeholder="Numero de Telefone" name="telefone" [(ngModel)]="modalVoluntario.telefone" required/>
         </clr-input-container>
 
         <clr-accordion style="margin: 20px 0 0 0;">
@@ -56,15 +56,15 @@
             <clr-accordion-content *clrIfExpanded>
                 <clr-input-container>
                     <label>@ do Twitter</label>
-                    <input clrInput placeholder="Twitter" name="nome" [(ngModel)]="modalVoluntario.nome" />
+                    <input clrInput placeholder="Twitter" name="twitter_user" [(ngModel)]="modalVoluntario.twitter_user"/>
                 </clr-input-container>
                 <clr-input-container>
                     <label>Link do Facebook</label>
-                    <input clrInput placeholder="Facebook Link" name="nome" [(ngModel)]="modalVoluntario.nome" />
+                    <input clrInput placeholder="Facebook Link" name="fb_link" [(ngModel)]="modalVoluntario.fb_link" required/>
                 </clr-input-container>
                 <clr-input-container>
                     <label>Número do WhatsApp</label>
-                    <input clrInput placeholder="Número WhatsApp" name="nome" [(ngModel)]="modalVoluntario.nome" />
+                    <input clrInput placeholder="Número WhatsApp" name="wpp_num" [(ngModel)]="modalVoluntario.wpp_num"/>
                 </clr-input-container>
             </clr-accordion-content>
           </clr-accordion-panel>
@@ -72,7 +72,7 @@
         
             <clr-textarea-container style="height: fit-content;">
                 <label>Descrição do Serviço</label>
-                <textarea  clrTextarea [(ngModel)]="modalVoluntario.nome" name="nome"
+                <textarea  clrTextarea [(ngModel)]="modalVoluntario.descr_funcionamento" name="descr_funcionamento"
                 placeholder="Nos conte como funciona seu serviço.." required>
                 </textarea>
         </clr-textarea-container>

@@ -1,1 +1,28 @@
-<p>relatos works!</p>
+<div class="clr-row clr-justify-content-center">
+  <div class="clr-col-6">
+    <h1> Página de Relatos</h1>
+  </div>
+  <div class="clr-col-8">
+     <h2>Nessa página estão alguns relatos feitos pelas mulheres que utilizaram nossa aplicação, fique a vontade para ler, comentar e até mesmo realizar o seu próprio relato.</h2>
+  </div>
+</div>
+<div class="clr-row clr-justify-content-center">
+  <div class="clr-col-6">
+    <div class="clr-row">
+        <div class="clr-col-lg-4 clr-col-12">
+            <div *ngFor="let depoimento of depoimentos">
+                <clr-datagrid>
+                        <clr-dg-column>Nome, Idade</clr-dg-column>
+                        <clr-dg-column>Depoimento</clr-dg-column>
+                    <clr-dg-row>
+                        <clr-dg-cell>{{depoimento.apelido}}, {{depoimento.idade}}</clr-dg-cell>
+                        <clr-dg-cell> {{depoimento.depoimento}}</clr-dg-cell>    
+                    </clr-dg-row>
+                </clr-datagrid>  
+            </div>
+        </div>
+    </div>  
+  <div class="clr-col-8">
+    <button class="btn btn-outline" (click)="basic = true">Realizar Relato</button>
+  </div>
+</div>
