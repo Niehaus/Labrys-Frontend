@@ -6,19 +6,20 @@
      <h2>Nessa página estão alguns relatos feitos pelas mulheres que utilizaram nossa aplicação, fique a vontade para ler, comentar e até mesmo realizar o seu próprio relato.</h2>
   </div>
 </div>
+
 <div class="clr-row clr-justify-content-center">
-  <div class="clr-col-6">
-    <div class="clr-row">
-        <div class="clr-col-lg-4 clr-col-12">
-            <div *ngFor="let depoimento of depoimentos">
-                <clr-datagrid>
-                        <clr-dg-column>Nome, Idade</clr-dg-column>
-                        <clr-dg-column>Depoimento</clr-dg-column>
-                    <clr-dg-row>
-                        <clr-dg-cell>{{depoimento.apelido}}, {{depoimento.idade}}</clr-dg-cell>
-                        <clr-dg-cell> {{depoimento.depoimento}}</clr-dg-cell>    
-                    </clr-dg-row>
-                </clr-datagrid>  
+    <div class="clr-col-6">
+        <div class="clr-row">
+            <div *ngFor="let depoimento of depoimentos" class="clr-col-lg-4 clr-col-12">
+                <div class="card">
+                    <div class="card-block">
+                        <h3 class="card-title">{{depoimento.apelido}}, {{depoimento.idade}}</h3>
+                        <p class="card-text">{{depoimento.depoimento}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="..." class="btn btn-sm btn-link">Deixar um Comentário</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>  
@@ -26,3 +27,31 @@
     <button class="btn btn-outline" (click)="basic = true">Realizar Relato</button>
   </div>
 </div>
+
+<clr-modal [(clrModalOpen)]="basic" [clrModalSize]="'md'">
+  <h3 class="modal-title">Compartilhe Conosco!</h3>
+  <div class="modal-body">
+    <form clrForm>
+      <clr-input-container>
+        <label>Apelido</label>
+        <input clrInput placeholder="Nome ficticío" name="nome" [(ngModel)]="modalRelato.apelido" required />
+      </clr-input-container>
+     
+      <clr-input-container>
+        <label>Idade</label>
+        <input clrInput placeholder="Idade real ou não" name="idade" [(ngModel)]="modalRelato.idade" required />
+      </clr-input-container>
+
+      <clr-textarea-container style="height: fit-content;">
+        <label>Seu relato vai aqui!</label>
+        <textarea clrTextarea [(ngModel)]="modalRelato.depoimento" name="depoimento"
+          placeholder="Sinta-se a vontade para compartilhar conosco o que achar que deve.." required>
+                </textarea>
+      </clr-textarea-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="cancelar()">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="salvar()">Confirmar</button>
+  </div>
+</clr-modal>

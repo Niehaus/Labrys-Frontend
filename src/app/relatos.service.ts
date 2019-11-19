@@ -14,4 +14,8 @@ export class RelatosService {
   getRelatos(): Observable<Relato[]> {
     return this.http.get<Relato[]>('http://localhost:3000/depoimento');
   }
+
+  adicionar(relato: Relato): Observable<any> {
+    return this.http.post("http://localhost:3000/depoimento", relato);
+  }
 }

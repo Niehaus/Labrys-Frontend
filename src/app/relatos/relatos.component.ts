@@ -9,11 +9,38 @@ import { RelatosService } from '../relatos.service';
 export class RelatosComponent implements OnInit {
 
   private depoimentos = new Array<Relato>();
+  private modalRelato: Relato;
+
+  private basic: boolean;
 
   constructor(private service: RelatosService) { }
 
   ngOnInit() {
+    this.modalRelato = new Relato();
     this.service.getRelatos().subscribe(depoimentos => this.depoimentos = depoimentos);
+  }
+
+  salvar() {
+    this.service.adicionar(this.modalRelato).subscribe(res => {
+      this.modalRelato.iddepoimentos = res.insertId;
+      this.depoimentos.push(this.modalRelato);
+      this.fecharModal();
+    });
+  }
+  
+  adicionar() {
+    this.modalRelato = new Relato();
+    this.basic = true;
+  }
+
+  fecharModal() {
+    this.modalRelato = new Relato();
+    this.basic = false;
+  }
+
+  cancelar() {
+    this.modalRelato = new Relato();
+    this.basic = false;
   }
 
 }

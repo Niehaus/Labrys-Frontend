@@ -12,7 +12,6 @@ export class ApoioComponent implements OnInit {
   private voluntarios = new Array<Voluntario>();
 
   private basic: boolean;
-  private acao: number;
 
   private Cadastro = {  };
 
