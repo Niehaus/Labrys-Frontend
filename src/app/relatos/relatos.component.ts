@@ -58,3 +58,12 @@ export class Relato {
     this.idade = 0;
   }
 }
+
+export class Comentario{
+  idcomentario: number;
+  comentario: string;
+  nickname: string;
+  idade: number;
+  depoimento_associado: number;
+
+}
