@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Relato } from './relatos/relatos.component';
+import { Relato, Comentario } from './relatos/relatos.component';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -15,6 +15,9 @@ export class RelatosService {
     return this.http.get<Relato[]>('http://localhost:3000/depoimento');
   }
 
+  getComentarios(): Observable<Comentario[]>{
+    return this.http.get<Comentario[]>('http://localhost:3000/comentario');
+  }
   adicionar(relato: Relato): Observable<any> {
     return this.http.post("http://localhost:3000/depoimento", relato);
   }

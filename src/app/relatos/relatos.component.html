@@ -19,20 +19,14 @@
             <clr-tree>
               <clr-tree-node [(clrExpanded)]="depoimento.expanded">
                 Comentários
-
-                <clr-tree-node [clrExpanded]="false">
-                  Comentario 2
-                <clr-tree-node>
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore nobis corporis adipisci aliquam nisi itaque non molestiae pariatur eveniet, atque accusamus placeat laudantium natus sint iste aperiam quis iure quo?
-                </clr-tree-node>
-                </clr-tree-node>
-
-                 <clr-tree-node [clrExpanded]="false">
-                   Comentario 1
-                <clr-tree-node>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit debitis, non neque quo ullam adipisci, harum officia iure reprehenderit dolor nisi aperiam cum a facilis placeat illum amet dicta? Ea?
-                </clr-tree-node>
-                 </clr-tree-node>  
+                <clr-tree-node *ngFor="let comentario of comentarios" [clrExpanded]="false">
+                  <span *ngIf="comentario.depoimento_associado == depoimento.iddepoimentos">
+                  <b>{{comentario.nickname}}, {{comentario.idade}}: </b></span>
+                  <clr-tree-node *ngIf="comentario.depoimento_associado == depoimento.iddepoimentos">
+                      {{comentario.comentario}} 
+                  </clr-tree-node>
+                </clr-tree-node>  
+               
                 <clr-tree-node [clrExpanded]="false">
                   Quero deixar um comentário!
                   <clr-tree-node>

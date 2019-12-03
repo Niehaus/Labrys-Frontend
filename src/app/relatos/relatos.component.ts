@@ -11,6 +11,7 @@ export class RelatosComponent implements OnInit {
   private depoimentos = new Array<Relato>();
   private modalRelato: Relato;
 
+  private comentarios = new Array<Comentario>();
   private basic: boolean;
 
   constructor(private service: RelatosService) { }
@@ -18,6 +19,7 @@ export class RelatosComponent implements OnInit {
   ngOnInit() {
     this.modalRelato = new Relato();
     this.service.getRelatos().subscribe(depoimentos => this.depoimentos = depoimentos);
+    this.service.getComentarios().subscribe(comentarios => this.comentarios = comentarios);
   }
 
   salvar() {
@@ -59,11 +61,19 @@ export class Relato {
   }
 }
 
-export class Comentario{
+export class Comentario {
   idcomentario: number;
   comentario: string;
   nickname: string;
   idade: number;
   depoimento_associado: number;
-
+  
+  constructor(){
+    this.idcomentario = 0;
+    this.comentario = "";
+    this.nickname = "";
+    this.idade = 0;
+    this.depoimento_associado = 0;
+  }
+  
 }
