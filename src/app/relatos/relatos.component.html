@@ -10,45 +10,35 @@
 <div class="clr-row clr-justify-content-center">
     <div class="clr-col-8">
       <div class="clr-row">
-        <div *ngFor="let depoimento of depoimentos" class="clr-col-lg-4 clr-col-12">
+        <div *ngFor="let depoimento of depoimentos; let i = index" class="clr-col-lg-4 clr-col-12">
           <div class="card">
             <div class="card-block">
-                <h3 class="card-title">{{depoimento.apelido}}, {{depoimento.idade}}</h3>
-                <p class="card-text">{{depoimento.depoimento}}</p>
+                <h3 class="card-title">{{depoimento.relato.apelido}}, {{depoimento.relato.idade}}</h3>
+                <p class="card-text">{{depoimento.relato.depoimento}}</p>
               </div>
             <clr-tree>
-              <clr-tree-node [(clrExpanded)]="depoimento.expanded">
+              <clr-tree-node [(clrExpanded)]="depoimento.relato.expanded">
                 Comentários
-                <clr-tree-node *ngFor="let comentario of comentarios" [clrExpanded]="false">
-                  <span *ngIf="comentario.depoimento_associado == depoimento.iddepoimentos">
-                  <b>{{comentario.nickname}}, {{comentario.idade}}: </b></span>
-                  <clr-tree-node *ngIf="comentario.depoimento_associado == depoimento.iddepoimentos">
+                <clr-tree-node *ngFor="let comentario of depoimento.comentarios" [clrExpanded]="false">
+                  <b>{{comentario.nickname}}, {{comentario.idade}}: </b>
+                  <clr-tree-node>
                       {{comentario.comentario}} 
                   </clr-tree-node>
                 </clr-tree-node>  
-               
-                <clr-tree-node [clrExpanded]="false">
-                  Quero deixar um comentário!
-                  <clr-tree-node>
-                    <form clrForm>
-                      <clr-input-container>
-                        <label>Apelido</label>
-                        <input clrInput placeholder="Nome ficticío" name="nome" [(ngModel)]="modalRelato.apelido"/>
-                      </clr-input-container>
-                      <clr-textarea-container>
-                        <label>Seu relato vai aqui!</label>
-                        <textarea clrTextarea [(ngModel)]="modalRelato.depoimento" name="depoimento"
-                            placeholder="Digite seu comentário!">
-                        </textarea>
-                      </clr-textarea-container>
-                    </form>
-                  </clr-tree-node>
-                  <clr-tree-node>
-                    <button type="button" class="btn btn-primary" (click)="salvar()">Enviar</button>
-                    </clr-tree-node>  
-                </clr-tree-node>
               </clr-tree-node>
             </clr-tree>
+            <div class="card-footer">
+              <form clrForm>
+              <clr-input-container>
+                <input clrInput placeholder="Nome ficticío" name="nickname" [(ngModel)]="depoimento.modalComentario.nickname" />
+              </clr-input-container>
+              <clr-textarea-container>
+                <textarea clrTextarea [(ngModel)]="depoimento.modalComentario.comentario" name="comentario"
+                  placeholder="Digite seu comentário!"></textarea>
+              </clr-textarea-container>
+             </form>
+              <button type="button" class="btn btn-link btn-sm" (click)="salvar()">Enviar Comentário</button>
+            </div>
           </div>
         </div>
       </div>  
@@ -87,6 +77,7 @@
     <button type="button" class="btn btn-primary" (click)="salvar()">Confirmar</button>
   </div>
 </clr-modal>
+
 
 
 <!--<div class="container pb-cmnt-container">

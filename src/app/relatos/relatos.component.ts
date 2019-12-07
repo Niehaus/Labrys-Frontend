@@ -8,24 +8,36 @@ import { RelatosService } from '../relatos.service';
 })
 export class RelatosComponent implements OnInit {
 
-  private depoimentos = new Array<Relato>();
-  private modalRelato: Relato;
 
-  private comentarios = new Array<Comentario>();
+  private depoimentos: Array<Depoimento>;
+  modalRelato: Relato;
+
   private basic: boolean;
+  private basic2: boolean;
 
   constructor(private service: RelatosService) { }
 
   ngOnInit() {
     this.modalRelato = new Relato();
-    this.service.getRelatos().subscribe(depoimentos => this.depoimentos = depoimentos);
-    this.service.getComentarios().subscribe(comentarios => this.comentarios = comentarios);
+    this.depoimentos = new Array<Depoimento>();
+    this.service.getRelatos().subscribe(relatos => {      
+      relatos.forEach(relato => {
+        let depoimento = new Depoimento();
+        depoimento.relato = relato;
+
+        this.service.getComentarios(relato.iddepoimentos).subscribe(comentarios => {
+          console.log(" ========= " + comentarios);
+          depoimento.comentarios = comentarios;
+          this.depoimentos.push(depoimento);
+        });
+      });      
+    });
   }
 
   salvar() {
     this.service.adicionar(this.modalRelato).subscribe(res => {
       this.modalRelato.iddepoimentos = res.insertId;
-      this.depoimentos.push(this.modalRelato);
+      //this.depoimentos.push(this.modalRelato);
       this.fecharModal();
     });
   }
@@ -45,6 +57,7 @@ export class RelatosComponent implements OnInit {
     this.basic = false;
   }
 
+
 }
 
 export class Relato {
@@ -62,18 +75,32 @@ export class Relato {
 }
 
 export class Comentario {
-  idcomentario: number;
+  idcomentarios: number;
   comentario: string;
   nickname: string;
   idade: number;
   depoimento_associado: number;
   
   constructor(){
-    this.idcomentario = 0;
+    this.idcomentarios = 0;
     this.comentario = "";
     this.nickname = "";
     this.idade = 0;
     this.depoimento_associado = 0;
   }
   
+}
+
+export class Depoimento {
+
+  relato: Relato;
+  comentarios: Array<Comentario>;
+
+  modalComentario: Comentario;
+
+  constructor() {
+    this.comentarios = new Array<Comentario>();
+    this.modalComentario = new Comentario();
+  }
+
 }

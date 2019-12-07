@@ -15,8 +15,8 @@ export class RelatosService {
     return this.http.get<Relato[]>('http://localhost:3000/depoimento');
   }
 
-  getComentarios(): Observable<Comentario[]>{
-    return this.http.get<Comentario[]>('http://localhost:3000/comentario');
+  getComentarios(iddepoimentos): Observable<Comentario[]>{
+    return this.http.get<Comentario[]>('http://localhost:3000/comentario/' + iddepoimentos);
   }
   adicionar(relato: Relato): Observable<any> {
     return this.http.post("http://localhost:3000/depoimento", relato);
