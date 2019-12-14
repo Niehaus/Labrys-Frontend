@@ -12,7 +12,8 @@ import { RelatosComponent } from './relatos/relatos.component';
 import { ApoioComponent } from './apoio/apoio.component';
 import { StaffComponent } from './staff/staff.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -26,11 +27,15 @@ import { FormsModule } from '@angular/forms'
   ],
   imports: [
     BrowserModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCFFuTAvQD8HKsujiyQo27nCUfvts9cgjA',
+      libraries: ['places', 'geometry']
+    }),
     AppRoutingModule,
     ClarityModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

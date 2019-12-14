@@ -35,3 +35,8 @@ p {
   margin-right: auto;
   width: 60%;
 }
+
+agm-map {
+  height: 300px;
+  width: 350px;
+}

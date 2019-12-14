@@ -17,15 +17,15 @@
           <clr-radio-container clrInline>
             <label>Tipo de Violência</label>
             <clr-radio-wrapper>
-              <input type="radio" clrRadio name="options" required value="option1" />
+              <input type="radio" clrRadio name="options" required value="Violência Física" [(ngModel)]="novaDenuncia.tipo_violencia"/>
               <label>Violência Física</label>
             </clr-radio-wrapper>
             <clr-radio-wrapper>
-              <input type="radio" clrRadio name="options" required value="option2" />
+              <input type="radio" clrRadio name="options" required value="Violência Símbolica" [(ngModel)]="novaDenuncia.tipo_violencia" />
               <label>Violência Símbolica</label>
             </clr-radio-wrapper>
             <clr-radio-wrapper>
-              <input type="radio" clrRadio name="options" required value="Violência Física e Símbolica" />
+              <input type="radio" clrRadio name="options" required value="Violência Física e Símbolica"  [(ngModel)]="novaDenuncia.tipo_violencia"/>
               <label>Ambas</label>
             </clr-radio-wrapper>
             <clr-control-helper>Símbolica: Assédio, Xingamento, Ameaças</clr-control-helper>
@@ -35,6 +35,17 @@
           <label>Conte-nos se quiser!</label>
             <textarea clrTextarea  name="msg" placeholder="Sua mensagem aqui.." [(ngModel)]="novaDenuncia.depoimento"></textarea>
           </clr-textarea-container>
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom]='13'
+                   (mapClick)='addMarker($event.coords.lat, $event.coords.lng)'>
+            <agm-marker
+              *ngFor='let marker of markers'
+              [latitude]='marker.lat'
+              [longitude]='marker.lng'
+              (markerClick)='selectMarker($event)'
+            >
+            </agm-marker>
+          </agm-map>
+          <p *ngIf='selectedMarker'>Lat: {{ selectedMarker.lat }} Lng: {{ selectedMarker.lng }}</p>
         </form>
       </div>
       <div class="card-block" style="font-size: 18px; margin: auto;">
