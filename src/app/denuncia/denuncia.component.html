@@ -8,7 +8,7 @@
       <div class="card-block">
 
         <form clrForm>
-          <clr-input-container>
+         <clr-input-container>
             <label>Nome do Local</label>
             <label>
               <input clrInput placeholder="Ex.: Bar X, Republica X" name="nomeLocal" [(ngModel)]="novaDenuncia.nome_local" />
@@ -32,24 +32,26 @@
             <clr-control-error>This field is required!</clr-control-error>
           </clr-radio-container>
           <clr-textarea-container>
-          <label>Conte-nos se quiser!</label>
+          <label style="justify-content: initial">Conte-nos se quiser!</label>
             <textarea clrTextarea  name="msg" placeholder="Sua mensagem aqui.." [(ngModel)]="novaDenuncia.depoimento"></textarea>
           </clr-textarea-container>
-          <agm-map [latitude]="lat" [longitude]="lng" [zoom]='13'
-                   (mapClick)='addMarker($event.coords.lat, $event.coords.lng)'>
-            <agm-marker
-              *ngFor='let marker of markers'
-              [latitude]='marker.lat'
-              [longitude]='marker.lng'
-              (markerClick)='selectMarker($event)'
-            >
-            </agm-marker>
-          </agm-map>
-          <p *ngIf='selectedMarker'>Lat: {{ selectedMarker.lat }} Lng: {{ selectedMarker.lng }}</p>
+          <label><b>Marque no Mapa o Local</b></label>
+            <agm-map style="align-self: center" [latitude]="lat" [longitude]="lng" [zoom]='15'
+                     (mapClick)='addMarker($event.coords.lat, $event.coords.lng)'>
+              <agm-marker
+                *ngFor='let marker of markers'
+                [latitude]='marker.lat'
+                [longitude]='marker.lng'
+                [markerDraggable]='true'
+                (markerClick)='selectMarker($event)'
+              >
+              </agm-marker>
+            </agm-map>
+            <p *ngIf='selectedMarker'>Lat: {{ selectedMarker.lat }} Lng: {{ selectedMarker.lng }}</p>
         </form>
       </div>
       <div class="card-block" style="font-size: 18px; margin: auto;">
-        <button type="button" class="btn btn-outline btn-sm" (click)="salvar()">Realizar Denúncia</button>
+        <button type="button" class="btn btn-outline btn-sm" routerLink="/mapa-atual" (click)="salvar()">Realizar Denúncia</button>
       </div>
     </div>
   </div>

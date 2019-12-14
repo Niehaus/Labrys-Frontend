@@ -22,50 +22,21 @@ export class DenunciaComponent implements OnInit {
   markers = [];
 
   public searchControl: FormControl;
-  public zoom: number;
 
 
   constructor(private service: DenunciaService,
               private mapsAPILoader: MapsAPILoader,
               private ngZone: NgZone) { }
 
-
-  @ViewChild('searchElementRef', {static: true}) searchElementRef: ElementRef;
-
   ngOnInit() {
     this.novaDenuncia = new Denuncia();
-    this.searchControl = new FormControl();
-
-    // set current position
-    this.setCurrentPosition();
-
-    // load Places Autocomplete
-    this.mapsAPILoader.load().then(() => {
-      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ['address']
-      });
-      autocomplete.addListener('place_changed', () => {
-        this.ngZone.run(() => {
-          // get the place result
-          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
-          // verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-
-          // set latitude, longitude and zoom
-          this.lat = place.geometry.location.lat();
-          this.lng = place.geometry.location.lng();
-          this.zoom = 12;
-        });
-      });
-    });
   }
 
   addMarker(lat: number, lng: number) {
     this.markers.pop();
     this.markers.push({ lat, lng, alpha: 0.4 });
+    this.novaDenuncia.latitude = this.markers[0].lat;
+    this.novaDenuncia.longitude = this.markers[0].lng;
   }
 
   max(coordType: 'lat' | 'lng'): number {
@@ -77,27 +48,18 @@ export class DenunciaComponent implements OnInit {
   }
 
   selectMarker(event) {
-    console.log(this.markers);
     this.selectedMarker = {
       lat: event.latitude,
       lng: event.longitude
     };
   }
-  // Get Current Location Coordinates
-  private setCurrentPosition() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude;
-        this.zoom = 12;
-      });
-    }
-  }
+
   salvar() {
-    console.log(this.novaDenuncia.tipo_violencia);
+    this.service.postDenuncia(this.novaDenuncia).subscribe(res => {
+      this.novaDenuncia = new Denuncia();
+      this.markers.pop();
+    });
   }
-
-
 }
 
 export class Denuncia {
@@ -116,3 +78,6 @@ export class Denuncia {
     this.longitude = 0;
   }
 }
+
+// TODO: arrumar marker drag pra mudar a latitude
+// TODO: tentar arrumar geolocation
