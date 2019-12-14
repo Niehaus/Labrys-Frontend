@@ -1,1 +1,52 @@
-<p>denuncia works!</p>
+<h1>Página de Denúncias</h1>
+<section class="container row-wrap" >
+  <div class="item">
+    <div class="card"  style="max-width: fit-content">
+      <div class="card-header">
+        <h3>Formulário de Denúncia</h3>
+      </div>
+      <div class="card-block">
+
+        <form clrForm>
+          <clr-input-container>
+            <label>Nome do Local</label>
+            <label>
+              <input clrInput placeholder="Ex.: Bar X, Republica X" name="nomeLocal" [(ngModel)]="novaDenuncia.nome_local" />
+            </label>
+          </clr-input-container>
+          <clr-radio-container clrInline>
+            <label>Tipo de Violência</label>
+            <clr-radio-wrapper>
+              <input type="radio" clrRadio name="options" required value="option1" />
+              <label>Violência Física</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper>
+              <input type="radio" clrRadio name="options" required value="option2" />
+              <label>Violência Símbolica</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper>
+              <input type="radio" clrRadio name="options" required value="Violência Física e Símbolica" />
+              <label>Ambas</label>
+            </clr-radio-wrapper>
+            <clr-control-helper>Símbolica: Assédio, Xingamento, Ameaças</clr-control-helper>
+            <clr-control-error>This field is required!</clr-control-error>
+          </clr-radio-container>
+          <clr-textarea-container>
+          <label>Conte-nos se quiser!</label>
+            <textarea clrTextarea  name="msg" placeholder="Sua mensagem aqui.." [(ngModel)]="novaDenuncia.depoimento"></textarea>
+          </clr-textarea-container>
+        </form>
+      </div>
+      <div class="card-block" style="font-size: 18px; margin: auto;">
+        <button type="button" class="btn btn-outline btn-sm" (click)="salvar()">Realizar Denúncia</button>
+      </div>
+    </div>
+  </div>
+  <section class="container row-wrap">
+    <div class="item">
+      <img src="assets/img/dengirl.png" alt="image" class="center">
+    </div>
+  </section>
+
+</section>
+

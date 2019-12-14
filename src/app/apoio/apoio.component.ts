@@ -21,7 +21,7 @@ export class ApoioComponent implements OnInit {
     this.modalVoluntario = new Voluntario();
     this.service.getVoluntarios().subscribe(voluntarios => this.voluntarios = voluntarios);
   }
-  
+
   salvar() {
     this.Cadastro = {
       User: {
@@ -42,7 +42,7 @@ export class ApoioComponent implements OnInit {
       this.modalVoluntario.idcadastro_voluntario = res.insertId;
       this.voluntarios.push(this.modalVoluntario);
       this.fecharModal();
-    }); 
+    });
   }
 
   adicionar() {
@@ -61,7 +61,7 @@ export class ApoioComponent implements OnInit {
   }
 }
 
-  export class Voluntario {
+export class Voluntario {
     idcadastro_voluntario: number;
     nome: string;
     tipo_da_ajuda: string;
@@ -71,14 +71,14 @@ export class ApoioComponent implements OnInit {
     fb_link: string;
     wpp_num: string;
 
-  constructor(){
+  constructor() {
     this.idcadastro_voluntario = 0;
-    this.nome = "";
-    this.tipo_da_ajuda = "";
-    this.telefone = "";
-    this.descr_funcionamento = "";
-    this.twitter_user = "";
-    this.fb_link = "";
-    this.wpp_num = "";
+    this.nome = '';
+    this.tipo_da_ajuda = '';
+    this.telefone = '';
+    this.descr_funcionamento = '';
+    this.twitter_user = '';
+    this.fb_link = '';
+    this.wpp_num = '';
   }
 }

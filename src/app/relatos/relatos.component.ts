@@ -8,6 +8,8 @@ import { RelatosService } from '../relatos.service';
 })
 export class RelatosComponent implements OnInit {
 
+  constructor(private service: RelatosService) { }
+
 
   private depoimentos: Array<Depoimento>;
   modalRelato: Relato;
@@ -15,39 +17,46 @@ export class RelatosComponent implements OnInit {
   private basic: boolean;
   private basic2: boolean;
 
-  constructor(private service: RelatosService) { }
-
   ngOnInit() {
     this.modalRelato = new Relato();
     this.depoimentos = new Array<Depoimento>();
-    this.service.getRelatos().subscribe(relatos => {      
+    this.service.getRelatos().subscribe(relatos => {
       relatos.forEach(relato => {
-        let depoimento = new Depoimento();
+        const depoimento = new Depoimento();
         depoimento.relato = relato;
-
         this.service.getComentarios(relato.iddepoimentos).subscribe(comentarios => {
-          console.log(" ========= " + comentarios);
           depoimento.comentarios = comentarios;
           this.depoimentos.push(depoimento);
         });
-      });      
+      });
     });
   }
 
   salvar() {
     this.service.adicionar(this.modalRelato).subscribe(res => {
       this.modalRelato.iddepoimentos = res.insertId;
-      //this.depoimentos.push(this.modalRelato);
+      // this.depoimentos.push(this.modalRelato);
       this.fecharModal();
     });
   }
-  
+
+  comentar(iddepo: number) {
+    this.depoimentos.forEach(depoimento => {
+      if (depoimento.relato.iddepoimentos === iddepo) {
+        depoimento.modalComentario.depoimento_associado = iddepo;
+        this.service.adicionarComentario(depoimento.modalComentario).subscribe(res => {
+          depoimento.modalComentario = new Comentario();
+        });
+      }
+    });
+  }
   adicionar() {
     this.modalRelato = new Relato();
     this.basic = true;
   }
 
   fecharModal() {
+
     this.modalRelato = new Relato();
     this.basic = false;
   }
@@ -57,8 +66,7 @@ export class RelatosComponent implements OnInit {
     this.basic = false;
   }
 
-
-}
+  }
 
 export class Relato {
   iddepoimentos: number;
@@ -66,10 +74,10 @@ export class Relato {
   apelido: string;
   idade: number;
 
-  constructor(){
+  constructor() {
     this.iddepoimentos = 0;
-    this.depoimento = "";
-    this.apelido = "";
+    this.depoimento = '';
+    this.apelido = '';
     this.idade = 0;
   }
 }
@@ -80,15 +88,15 @@ export class Comentario {
   nickname: string;
   idade: number;
   depoimento_associado: number;
-  
-  constructor(){
+
+  constructor() {
     this.idcomentarios = 0;
-    this.comentario = "";
-    this.nickname = "";
-    this.idade = 0;
+    this.comentario = '';
+    this.nickname = '';
+    this.idade = null;
     this.depoimento_associado = 0;
   }
-  
+
 }
 
 export class Depoimento {

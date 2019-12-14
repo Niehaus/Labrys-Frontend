@@ -10,7 +10,7 @@
 <div class="clr-row clr-justify-content-center">
     <div class="clr-col-8">
       <div class="clr-row">
-        <div *ngFor="let depoimento of depoimentos; let i = index" class="clr-col-lg-4 clr-col-12">
+        <div *ngFor="let depoimento of depoimentos" class="clr-col-lg-4 clr-col-12">
           <div class="card">
             <div class="card-block">
                 <h3 class="card-title">{{depoimento.relato.apelido}}, {{depoimento.relato.idade}}</h3>
@@ -22,33 +22,36 @@
                 <clr-tree-node *ngFor="let comentario of depoimento.comentarios" [clrExpanded]="false">
                   <b>{{comentario.nickname}}, {{comentario.idade}}: </b>
                   <clr-tree-node>
-                      {{comentario.comentario}} 
+                      {{comentario.comentario}}
                   </clr-tree-node>
-                </clr-tree-node>  
+                </clr-tree-node>
               </clr-tree-node>
             </clr-tree>
             <div class="card-footer">
-              <form clrForm>
-              <clr-input-container>
-                <input clrInput placeholder="Nome ficticío" name="nickname" [(ngModel)]="depoimento.modalComentario.nickname" />
-              </clr-input-container>
-              <clr-textarea-container>
-                <textarea clrTextarea [(ngModel)]="depoimento.modalComentario.comentario" name="comentario"
-                  placeholder="Digite seu comentário!"></textarea>
-              </clr-textarea-container>
-             </form>
-              <button type="button" class="btn btn-link btn-sm" (click)="salvar()">Enviar Comentário</button>
+                <form clrForm>
+                  <clr-input-container>
+                    <label>Nome</label>
+                    <input clrInput placeholder="Nome ficticío" name="nickname" [(ngModel)]="depoimento.modalComentario.nickname" />
+                  </clr-input-container>
+                  <clr-input-container>
+                    <label>Idade</label>
+                    <input clrInput placeholder="Idade" name="idade" [(ngModel)]="depoimento.modalComentario.idade" />
+                  </clr-input-container>
+                  <clr-textarea-container>
+                    <textarea clrTextarea [(ngModel)]="depoimento.modalComentario.comentario" name="comentario" placeholder="Digite seu comentário!"></textarea>
+                  </clr-textarea-container>
+                </form>
+                  <button type="button" class="btn btn-link btn-sm" (click)="comentar(depoimento.relato.iddepoimentos)">Enviar Comentário</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>  
+      </div>
+      <div class="clr-col-6">
+        <button class="btn btn-outline" (click)="basic = true">Realizar Relato</button>
     </div>
-  <div class="clr-col-6">
-    <button class="btn btn-outline" (click)="basic = true">Realizar Relato</button>
-   
+  </div>
 
-    
-</div>
 
 <clr-modal [(clrModalOpen)]="basic" [clrModalSize]="'md'">
   <h3 class="modal-title">Compartilhe Conosco!</h3>
@@ -58,7 +61,7 @@
         <label>Apelido</label>
         <input clrInput placeholder="Nome ficticío" name="nome" [(ngModel)]="modalRelato.apelido" required />
       </clr-input-container>
-     
+
       <clr-input-container>
         <label>Idade</label>
         <input clrInput placeholder="Idade real ou não" name="idade" [(ngModel)]="modalRelato.idade" required />
@@ -80,11 +83,13 @@
 
 
 
-<!--<div class="container pb-cmnt-container">
-                   <div class="panel panel-info">
-                     <div class="panel-body">
-                       <textarea placeholder="Deixe seu comentário aqui!"
-                       class="pb-cmnt-textarea"></textarea>
+
+
+  <!--<div class="container pb-cmnt-container">
+                     <div class="panel panel-info">
+                       <div class="panel-body">
+                         <textarea placeholder="Deixe seu comentário aqui!"
+                         class="pb-cmnt-textarea"></textarea>
+                        </div>
                       </div>
-                    </div>
-                  </div>-->
+                    </div>-->
