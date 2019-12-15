@@ -21,8 +21,6 @@ export class DenunciaComponent implements OnInit {
   lng = -44.2535548;
   markers = [];
 
-  public searchControl: FormControl;
-
 
   constructor(private service: DenunciaService,
               private mapsAPILoader: MapsAPILoader,

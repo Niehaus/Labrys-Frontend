@@ -1,1 +1,60 @@
-<p>mapa-atual works!</p>
+<div class="container">
+  <div class="item">
+    <h1>Mapa Atualmente</h1>
+  </div>
+  <div class="item">
+    <h2>Você não está sozinha!</h2>
+  </div>
+  <div class="item">
+
+<agm-map style="align-self: center" [latitude]="lat" [longitude]="lng" [zoom]='15'>
+  <agm-marker
+    *ngFor='let marker of denunciado'
+    [latitude]='marker.latitude'
+    [longitude]='marker.longitude'
+    (markerClick)='selectMarker($event)'
+  >
+  </agm-marker>
+</agm-map>
+    <div class="item">
+      <div class="clr-row" *ngIf='selectedMarker'>
+        <div class="clr-col-lg-4 clr-col-12">
+
+        </div>
+        <div class="clr-col-lg-4 clr-col-12">
+          <div class="card">
+            <div class="card-block">
+              <h3 class="card-title">Sobre essa Denúncia</h3>
+              <p class="card-text">
+                Local:{{selectedMarker.nome_local}}
+                Tipo de Violência: <b>{{selectedMarker.tipo_violencia}}</b> <br>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="clr-col-lg-4 clr-col-12">
+
+        </div>
+      </div>
+  </div>
+
+  </div>
+  <div class="item" style="width: 50%; margin: auto;">
+    <h2>Juntas nos ajudamos, lutamos e contribuímos para a construção de uma cidade mais consciente e igualitária.</h2>
+  </div>
+
+
+  <div class="item">
+  <!-- <img src="assets/img/woman2.png" alt="image" class="center">-->
+  </div>
+
+  <div class="item">
+    <button class="btn btn-outline" routerLink="/denuncia" routerLinkActive="active">Realizar Denúncia!</button>
+  </div>
+</div>
+
+
+
+
+
+
