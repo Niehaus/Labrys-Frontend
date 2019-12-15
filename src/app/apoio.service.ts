@@ -17,11 +17,11 @@ export class ApoioService {
   }
 
   adicionar(voluntario: Object): Observable<any> {
-    return this.http.post("http://localhost:3000/cadastro", voluntario);
+    return this.http.post('http://localhost:3000/cadastro', voluntario);
   }
 
   editar(voluntario: Voluntario): Observable<any> {
-    return this.http.put("http://localhost:3000/cadastro/" + voluntario.idcadastro_voluntario, voluntario);
+    return this.http.put('http://localhost:3000/cadastro/' + voluntario.idcadastro_voluntario, voluntario);
   }
 
 }

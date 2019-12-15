@@ -16,12 +16,13 @@ export class MapaAtualComponent implements OnInit {
 
   private denunciado = new Array<Denuncias>();
   private Denuncia = new Denuncias();
+
   markers = [
     { lat: -21.126634, lng: -44.249250, alpha: 1 },
     { lat: -21.127405, lng: -44.245433, alpha: 1 },
     { lat: -21.137502, lng: -44.261103, alpha: 1 },
     { lat: -21.127707, lng: -44.253256, alpha: 1 },
-    { lat: -21.137502, lng: -44.261103, alpha: 1 },
+    { lat: -21.137702, lng: -44.261103, alpha: 1 },
     { lat: -21.131026, lng: -44.254290, alpha: 1 },
     { lat: -21.125513, lng: -44.246867, alpha: 1 }
     ];
@@ -32,12 +33,15 @@ export class MapaAtualComponent implements OnInit {
   constructor(private service: MapaAtualService) { }
 
   ngOnInit() {
-    this.Denuncia.nome_local = 'Em frente a Fábrica';
-    this.Denuncia.tipo_violencia = 'Violência Simbólica - Xingamentos';
-    this.Denuncia.latitude = this.markers[0].lat;
-    this.Denuncia.longitude = this.markers[0].lng;
-    this.denunciado.push(this.Denuncia);
+    this.markersIniciais();
+    this.service.getDenuncia().subscribe(res => {
+        res.forEach(denuncia => {
+          this.denunciado.push(denuncia);
+        });
+    });
   }
+
+
 
   selectMarker(event) {
     this.denunciado.forEach(denuncia => {
@@ -52,6 +56,63 @@ export class MapaAtualComponent implements OnInit {
         };
       }
     });
+  }
+
+  markersIniciais() {
+    this.Denuncia.nome_local = 'Em frente a Fábrica';
+    this.Denuncia.tipo_violencia = 'Violência Simbólica - Xingamentos';
+    this.Denuncia.latitude = this.markers[0].lat;
+    this.Denuncia.longitude = this.markers[0].lng;
+    this.denunciado.push(this.Denuncia);
+
+    this.Denuncia = new Denuncias();
+
+    this.Denuncia.nome_local = 'Divina Gula';
+    this.Denuncia.tipo_violencia = 'Violência Simbólica – Assédio Psicológico e Verbal';
+    this.Denuncia.latitude = this.markers[1].lat;
+    this.Denuncia.longitude = this.markers[1].lng;
+    this.denunciado.push(this.Denuncia);
+
+    this.Denuncia = new Denuncias();
+
+    this.Denuncia.nome_local = 'Avenida Tiradentes';
+    this.Denuncia.tipo_violencia = 'Violência Física - Sexual';
+    this.Denuncia.latitude = this.markers[2].lat;
+    this.Denuncia.longitude = this.markers[2].lng;
+    this.denunciado.push(this.Denuncia);
+
+    this.Denuncia = new Denuncias();
+
+    this.Denuncia.nome_local = 'República Aldeia';
+    this.Denuncia.tipo_violencia = 'Violência Simbólica – Assedio Psicológico';
+    this.Denuncia.latitude = this.markers[3].lat;
+    this.Denuncia.longitude = this.markers[3].lng;
+    this.denunciado.push(this.Denuncia);
+
+    this.Denuncia = new Denuncias();
+
+    this.Denuncia.nome_local = 'Avenida Tiradentes';
+    this.Denuncia.tipo_violencia = 'Violência Simbólica –  Xingamento - Violência Física – Agressão Física';
+    this.Denuncia.latitude = this.markers[4].lat;
+    this.Denuncia.longitude = this.markers[4].lng;
+    this.denunciado.push(this.Denuncia);
+
+    this.Denuncia = new Denuncias();
+
+    this.Denuncia.nome_local = 'Esquina da Araújo';
+    this.Denuncia.tipo_violencia = 'Violência Simbólica – Ameaça';
+    this.Denuncia.latitude = this.markers[5].lat;
+    this.Denuncia.longitude = this.markers[5].lng;
+    this.denunciado.push(this.Denuncia);
+
+    this.Denuncia = new Denuncias();
+
+    this.Denuncia.nome_local = 'R. Ver. Eli Araújo';
+    this.Denuncia.tipo_violencia = 'Violência Simbólica – Ameaça';
+    this.Denuncia.latitude = this.markers[6].lat;
+    this.Denuncia.longitude = this.markers[6].lng;
+    this.denunciado.push(this.Denuncia);
+
   }
 
 }

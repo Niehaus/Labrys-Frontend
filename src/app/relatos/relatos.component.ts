@@ -10,7 +10,6 @@ export class RelatosComponent implements OnInit {
 
   constructor(private service: RelatosService) { }
 
-
   private depoimentos: Array<Depoimento>;
   modalRelato: Relato;
 
