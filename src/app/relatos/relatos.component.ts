@@ -34,7 +34,9 @@ export class RelatosComponent implements OnInit {
   salvar() {
     this.service.adicionar(this.modalRelato).subscribe(res => {
       this.modalRelato.iddepoimentos = res.insertId;
+      console.log(this.modalRelato.iddepoimentos);
       // this.depoimentos.push(this.modalRelato);
+      location.reload();
       this.fecharModal();
     });
   }
@@ -45,10 +47,12 @@ export class RelatosComponent implements OnInit {
         depoimento.modalComentario.depoimento_associado = iddepo;
         this.service.adicionarComentario(depoimento.modalComentario).subscribe(res => {
           depoimento.modalComentario = new Comentario();
+          location.reload();
         });
       }
     });
   }
+
   adicionar() {
     this.modalRelato = new Relato();
     this.basic = true;
