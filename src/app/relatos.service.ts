@@ -22,7 +22,7 @@ export class RelatosService {
     return this.http.post('http://localhost:3000/depoimento', relato);
   }
 
-  adicionarComentario(comentario: Comentario): Observable<any>{
+  adicionarComentario(comentario: Comentario): Observable<any> {
     return this.http.post('http://localhost:3000/comentario/', comentario);
   }
 }
